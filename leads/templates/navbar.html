@@ -1,27 +1,61 @@
-<header class="text-white-600 body-font ">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center ">
-    <a href="{% url 'landing-page'%}"class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-purple-500 rounded-full" viewBox="0 0 24 24" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke="">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-      </svg>
-      <span class="ml-3 text-xl">DjCRM</span>
-    </a>
-    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+{%load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">CRM</a>
+   
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'land'%}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+      {%if user.is_authenticated %}
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto mb-5 mb-lg-0">
+      <!-- Example single danger button -->
       
-      <a href="{% url 'lead-list' %}" class="mr-5 hover:text-blue-500">Leads</a>
-      <a class="mr-5 hover:text-blue-900">SignUp</a>
-    </nav>
-    {% if user.is_authenticated %}
-    <a href="{% url 'logout'%}" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none mr-5 hover:text-blue-900 rounded text-base mt-4 md:mt-0">Logout
-         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke="">
-         <path d="M5 12h14M12 5l7 7-7 7"></path>
-       </svg>
-   </a>
-   {% else %}
-    <a href="{% url 'login'%}" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none mr-5 hover:text-blue-900 rounded text-base mt-4 md:mt-0">Login
-         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24" style="--darkreader-inline-stroke: currentColor;" data-darkreader-inline-stroke="">
-         <path d="M5 12h14M12 5l7 7-7 7"></path>
-       </svg>
-  {% endif %}
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{request.user}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Update Profile</a></li>
+        </ul>
+      </li>
+    </ul>
+
+  <a href="{%url 'logout'%}">
+    <input type='submit' value='Logout' class="btn btn-outline-primary">
+  </a>
+       {% else %}
+     
+       <a class="nav-link active" aria-current="page" href="{%url 'signup'%}">SignUp</a>
+       <a href="{%url 'login'%}">
+        <input type='submit' value='Login' class="btn btn-outline-primary ">
+       </a>
+      </div>
+   </ul>
+       {% endif %}
+      
+    </div>
   </div>
-</header>
+</nav>

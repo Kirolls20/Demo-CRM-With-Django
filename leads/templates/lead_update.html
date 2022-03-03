@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title  %} 
+<title>Update Lead</title>
+{% endblock  %}
+
+{% block content  %}
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+
+<div class="container">
+ <center>
+<div class="card o-hidden border-0 shadow-lg my-5">
+    <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+       
+        <div class="col">
+            <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+            <div class="col-lg-7">
+                <div class="p-5">
+                    <div class="text-center">
+                       {% if form.errors%}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          <strong>Error</strong> You should check in on some of those fields below.
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                              {%endif %}
+                       <h1> Update Lead<h1>
+                          <form method='post'>
+                             {% csrf_token %}
+                                 
+                                 <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Fisrt Name</span>
+                                    <input type="text" name="first_name" value="{{lead.first_name}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                 </div>
+                                 <div class="input-group input-group-sm mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-sm">Last Name</span>
+                                    <input type="text" name='last_name' value="{{lead.last_name}}"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                 </div>
+                                 <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">@</span>
+                                    <input type="text" name='email'value="{{lead.email}}" class="form-control" placeholder="Email Address" aria-label="Email" aria-describedby="basic-addon1">
+                                 </div>
+                                 <div class="input-group input-group-sm mb-3">
+                                       <span class="input-group-text" id="inputGroup-sizing-sm">Age</span>
+                                       <input type="number" name='age' value="{{lead.age}}" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                                    </div>
+                                  <div class="input-group mb-3">
+                                 <select class="form-select" name='country' value="{{lead.country}}" aria-label="Default select example">
+                                    <option disabled>Your Country</option>
+                                    <option selected>{{lead.country}}</option>
+                                    {%for country in form.country %}
+                                    <option selected>{{country}}</option>
+                                    {% endfor %}
+
+                                 </div>
+                                  <div class="input-group mb-3 border-2">
+                                 </select>
+                                 <select class="form-select" name='source' value="{{lead.source}}" aria-label="Default select example">
+                                    <option disabled>You Know us from..</option>
+                                     <option>{{lead.source}}</option>
+                                    {%for source in form.source %}
+                                    <option>{{source}}</option>
+                                    {%endfor%}
+                                 </select>
+                              </div>
+                               <select class="form-select form-select-sm" name="agent" vlaue="{{lead.agent}}"  aria-label=".form-select-sm example">
+                                 <option disabled>The Agent ..</option>
+                                 <option selected >{{lead.agent}}</option
+                                 {%for agent in form.agent %}
+                                  <option selected >{{agent}}</option>
+                                  {%endfor%}
+                              </select> 
+                              
+                              <input type='submit' class="btn btn-primary btn-user btn-block" value="Update Lead">
+                          </form>
+</center>
+                  </div>
+            </div>
+         </div>
+      </div>
+   </div>   
+   </div>
+</div>
+</center>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+
+
+
+{% endblock  %}
