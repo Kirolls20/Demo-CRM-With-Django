@@ -142,3 +142,10 @@ AUTH_USER_MODEL='leads.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL=reverse_lazy('login')
 
+# sending Emial settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kyrollssabry@gmail.com'
+EMAIL_HOST_PASSWORD = 'mypasskoko123'
+EMAIL_USE_TLS = True

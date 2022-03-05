@@ -9,7 +9,7 @@ from .models import User,Lead,Agent
 class CreateLeadForm(ModelForm):
    class Meta:
       model= Lead
-      fields =['first_name','last_name','age','email','country','source','agent']
+      fields =['first_name','last_name','age','email','country','source']
       widget= {
          'first_name':forms.TextInput(),
          'last_name': forms.TextInput(),
@@ -17,6 +17,6 @@ class CreateLeadForm(ModelForm):
          'email':forms.EmailInput(),
          'country': forms.Select(),
          'source':forms.Select(),
-         'agent':forms.Select(),
+         #'agent':forms.Select(),
       }
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import post_save
 from django.conf import settings
 
 COUNTRY_NAMES=(
@@ -27,7 +28,7 @@ class User(AbstractUser):
    
    phone_number= models.CharField(max_length=15)
    job_title= models.CharField(max_length=100)
-   profile_pic = models.ImageField(null=True, blank=True, default="images/profile/profile_pic.jpg", upload_to="images/profile/")
+   profile_pic = models.ImageField(null=True, blank=True, upload_to="images/")
    joined_time= models.DateTimeField(auto_now_add=True)
    
 
@@ -46,12 +47,16 @@ class Lead(models.Model):
    def __str__(self):
       return f"{self.first_name} {self.last_name}"
 
-
 class Agent(models.Model):
    user= models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
    
    def __str__(self):
       return self.user.username
-   
 
+# create signal to listen if user created or not to add the user as agent 
+def post_user_signal(sender, instance,created,**kwargs):
+   if created:
+      Agent.objects.create(user=instance)
+
+post_save.connect(post_user_signal,sender=User)
 

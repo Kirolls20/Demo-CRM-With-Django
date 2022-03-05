@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Lead,Agent
+from .models import Lead,Agent,User
 from .forms import CreateLeadForm
+from accounts.forms import CreateUserForm, UpdateUserForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse, reverse_lazy
 
 
@@ -31,8 +34,13 @@ class CreateLeadView(LoginRequiredMixin, generic.CreateView):
    def get_success_url(self):
       return reverse_lazy('lead-list')
 
-# Lead DetailView Class
+   def form_valid(self,form):
+      obj= form.save(commit=False)
+      obj.agent = self.request.user.agent
+      obj.save()
+      return super(CreateLeadView,self).form_valid(form)
 
+# Lead DetailView Class
 
 class LeadDetailView(LoginRequiredMixin,generic.DetailView):
    template_name= 'lead_detail.html'
@@ -59,4 +67,18 @@ class LeadDeleteView(LoginRequiredMixin,generic.DeleteView):
    
    def get_success_url(self):
       return reverse_lazy('lead-list')
+
+# show Login User His leads 
+
+
+class ShowUserLeadView(LoginRequiredMixin,generic.ListView):
+   template_name='user_leeds.html'
+   model= Lead
+
+   def get_context_data(self, **kwargs):
+
+      context = super(ShowUserLeadView, self).get_context_data(**kwargs)
+      context['user_leads'] = Lead.objects.filter(agent=self.request.user.agent)
+      return context
+
 

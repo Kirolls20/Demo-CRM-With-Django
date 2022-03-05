@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm, UsernameField
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.forms import ModelForm
 from django import forms
 from leads.models import User, Lead, Agent
@@ -30,12 +30,7 @@ class CreateUserForm(UserCreationForm):
         #     'job_title':'',
         #     'profile_pic':'Choose image ',
         #     'password':'',
-
-
-
         # }
-
-
         widget = {
             'first_name': forms.TextInput(),
             'last_name': forms.TextInput(),
@@ -48,3 +43,9 @@ class CreateUserForm(UserCreationForm):
             # 'password1': forms.PasswordInput(),
             'profile_pic': forms.FileInput(),
         }
+# Change Update User Profile 
+class UpdateUserForm(UserChangeForm):
+    class Meta:
+        model=User
+        fields = ['first_name', 'last_name',
+                  'username', 'email', 'age', 'phone_number', 'job_title',  'profile_pic']

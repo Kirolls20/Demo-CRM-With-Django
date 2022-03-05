@@ -37,8 +37,8 @@
           {{request.user}}
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
-          <li><a class="dropdown-item" href="#">Update Profile</a></li>
+          <li><a class="dropdown-item" href="{% url 'user-profile' user.pk %}">Profile</a></li>
+          <li><a class="dropdown-item" href="{% url 'update-profile' user.pk %}">Update Profile</a></li>
         </ul>
       </li>
     </ul>

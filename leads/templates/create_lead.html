@@ -79,12 +79,12 @@
                                     {%endfor%}
                                  </select>
                               </div>
-                               <select class="form-select form-select-sm" name="agent" aria-label=".form-select-sm example">
+                               {% comment %} <select class="form-select form-select-sm" name="agent" aria-label=".form-select-sm example">
                                  <option disabled>The Agent ..</option>
                                  {%for agent in form.agent %}
                                   <option selected >{{agent}}</option>
                                   {%endfor%}
-                              </select> 
+                              </select>  {% endcomment %}
                               
                               <input type='submit' class="btn btn-primary btn-user btn-block" value="Create Lead">
                           </form>
