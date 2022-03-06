@@ -10,7 +10,4 @@ urlpatterns=[
    path('lead/<int:pk>/delete/',views.LeadDeleteView.as_view(),name='lead-delete'),
    path('user_lead/', views.ShowUserLeadView.as_view(),name='user-leads'),
    
-  
-   
-   
 ]
